@@ -39,7 +39,7 @@ os.chdir(project_dir)
 subprocess.run(['git', 'init'])
 
 # Set your GitHub repository remote URL
-github_repo_url = f"https://{github_username}:{github_token}@github.com/yourusername/repositoryname.git"
+github_repo_url = f"https://{github_username}:{github_token}@github.com/efffectery/VeryUseFullScript"
 
 # Add the remote if not already added
 subprocess.run(['git', 'remote', 'add', 'origin', github_repo_url])
